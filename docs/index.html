@@ -207,7 +207,7 @@
     .collapsible-content {
       list-style: none;
       padding: 0;
-      display: none; /* hidden by default */
+      display: none;
       width: 100%;
     }
 
@@ -299,8 +299,8 @@
           <button class="collapsible">Final Term Topics</button>
           <ul class="collapsible-content">
             <li><a href="#" data-file="notes/8.md">Network Traffic Analysis</a></li>
-            <li><a href="#" data-file="notes/9.md">Event Logs</a></li>
-            <li><a href="#" data-file="notes/10.md">Email Security Fundamental</a></li>
+            <li><a href="#" data-file="notes/10.md">Event Logs</a></li>
+            <li><a href="#" data-file="notes/9.md">Email Security Fundamental</a></li>
           </ul>
         </div>
       </nav>
@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (i < text.length) {
       description.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
       i++;
-      setTimeout(typeWriter,30); // typing speed in ms
+      setTimeout(typeWriter, 30); // typing speed in ms
     }
   }
 
