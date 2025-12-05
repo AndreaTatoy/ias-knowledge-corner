@@ -1,0 +1,31 @@
+title: Louise Andrea R. Tatoy's Personal Knowledge System
+email: tatoylouise0@gmail.com
+description: >-
+  A Personal Knowledge System showcasing knowledge in Information Assurance and Security.
+baseurl: "/"
+url: "https://beautiful-centaur-9a672d.netlify.app"
+
+markdown: kramdown
+
+collections:
+  notes:
+    output: true
+    permalink: /notes/:name.html
+
+nav:
+  - title: Home / Technical CV
+    url: /
+  - title: Importance of Security
+    url: /notes/1.html
+  - title: Career Opportunities
+    url: /notes/2.html
+  - title: Encryption Fundamentals
+    url: /notes/3.html
+  - title: Cloud & Virtualization
+    url: /notes/4.html
+  - title: OS Command Injection
+    url: /notes/5.html
+  - title: SQL Injection
+    url: /notes/6.html
+  - title: Cross-Site Scripting
+    url: /notes/7.html

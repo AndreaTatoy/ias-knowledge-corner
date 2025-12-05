@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Louise Andrea R. Tatoy's PKS</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu&display=swap" rel="stylesheet">
+
+  <!-- Markdown parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Gaegu', cursive;
+      display: flex;
+      height: 100vh;
+      background: #FFD5D5; /* content bg */
+    }
+
+    #container {
+      display: flex;
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 100vh;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    /* sidebar */
+    #sidebar {
+      flex: 0 0 250px;
+      background: #3A6F43;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    #sidebar img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-top:30px;
+      margin-bottom: 15px;
+      object-fit: cover;
+      border: 2px solid #FDAAAA; /* accent border */
+    }
+
+    #sidebar h2 {
+      margin: 0 0 10px 0;
+      font-size: 20px;
+      color: #ffffff; /* title color */
+      text-align: center;
+    }
+
+    #sidebar p {
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #ffffff; /* subheader color */
+    }
+
+    #sidebar nav ul {
+      list-style: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    #sidebar nav ul li {
+      margin: 10px 0;
+    }
+
+    #sidebar nav ul li a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+      display: block;
+      padding: 8px;
+      border-radius: 8px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    #sidebar nav ul li a:hover,
+    #sidebar nav ul li a.active {
+      background: #FFD5D5;
+      color: #3A6F43;
+    }
+
+    /* content area */
+    #content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 30px;
+      background: #FFD5D5;
+      color: #333;
+    }
+
+    h1 {
+      color: #3A6F43;
+      margin-top: 0;
+    }
+
+    h2, h3 {
+      color: #E97F4A;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    table th, table td {
+      border: 1px solid #3A6F43;
+      padding: 10px;
+      text-align: left;
+    }
+
+    table th {
+      background: #3A6F43;
+      font-weight: bold;
+      color: #FFD5D5;
+    }
+
+    pre {
+      background: #f4f4f4;
+      padding: 10px;
+      overflow-x: auto;
+    }
+
+    code {
+      background: #f4f4f4;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+
+    a {
+      color: #FDAAAA;
+      text-decoration: underline;
+    }
+
+    .collapsible {
+      font-family: 'Gaegu', cursive;
+      font-size: 16px;
+      background: #3A6F43;
+      color: #fff;
+      cursor: pointer;
+      padding: 10px;
+      width: 200px;
+      border: none;
+      outline: none;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 5px;
+      margin: 10px 0 5px 0;
+      transition: background 0.2s;
+    }
+
+    .collapsible:hover {
+      background: #FDAAAA;
+      color: #3A6F43;
+    }
+
+    .collapsible.active {
+      background: #E97F4A;
+      color: #ffffff;
+    }
+
+    .collapsible-content {
+      list-style: none;
+      padding: 0;
+      display: none; /* hidden by default */
+      width: 100%;
+    }
+
+    .collapsible-content li {
+      margin: 5px 0;
+    }
+
+    .collapsible-content li a {
+      color: #FFD5D5;
+      text-decoration: none;
+      display: block;
+      padding: 8px;
+      border-radius: 5px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .collapsible-content li a:hover,
+    .collapsible-content li a.active {
+      background: #FDAAAA;
+      color: #3A6F43;
+    }
+
+    .collapsible::after {
+      content: "▽";
+      display: inline-block;
+      margin-left: 10px;
+      vertical-align: middle;
+      font-size: 0.7em;
+      transition: transform 0.2s ease;
+    }
+
+    .collapsible.active::after {
+      transform: rotate(180deg);
+      vertical-align: 2px;
+    }
+
+</style>
+
+</head>
+<body>
+  <div id="container">
+    <div id="sidebar">
+      <img src="me.jpg" alt="Louise Andrea R. Tatoy">
+      <h2>Louise Andrea R. Tatoy</h2>
+      <p>🌸 hey there! welcome to my little corner of knowledge 🌟<br><br>
+      grab a cup of coffee ☕, <br> explore the topics, and let's have some fun learning about information <br> security! 🚀💻</p>
+
+      <nav>
+        <!-- Midterm Topics -->
+        <div class="collapsible-container">
+          <button class="collapsible">Midterm Topics</button>
+          <ul class="collapsible-content">
+            <li><a href="#" class="active" data-file="notes/about.md">About Me</a></li>
+            <li><a href="#" data-file="notes/1.md">Importance of Security</a></li>
+            <li><a href="#" data-file="notes/2.md">Career Opportunities</a></li>
+            <li><a href="#" data-file="notes/3.md">Encryption Fundamentals</a></li>
+            <li><a href="#" data-file="notes/4.md">Cloud & Virtualization</a></li>
+            <li><a href="#" data-file="notes/5.md">OS Command Injection</a></li>
+            <li><a href="#" data-file="notes/6.md">SQL Injection</a></li>
+            <li><a href="#" data-file="notes/7.md">Cross-Site Scripting</a></li>
+          </ul>
+        </div>
+
+        <!-- Final Term Topics -->
+        <div class="collapsible-container">
+          <button class="collapsible">Final Term Topics</button>
+          <ul class="collapsible-content">
+            
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div id="content">
+      <p>Loading...</p>
+    </div>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    const collapsibles = document.querySelectorAll('.collapsible');
+    collapsibles.forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+
+        collapsibles.forEach(other => {
+          if (other !== button) {
+            other.classList.remove('active');
+            other.nextElementSibling.style.display = 'none';
+          }
+        });
+
+        const isOpen = content.style.display === "block";
+        content.style.display = isOpen ? "none" : "block";
+
+        button.classList.toggle('active', !isOpen);
+      });
+    });
+
+    const links = document.querySelectorAll('.collapsible-content li a');
+    const content = document.getElementById('content');
+
+    async function loadMarkdown(file) {
+      try {
+        const res = await fetch(file);
+        if (!res.ok) throw new Error('File not found: ' + file + ' (status: ' + res.status + ')');
+        const mdText = await res.text();
+        content.innerHTML = marked.parse(mdText);
+      } catch (err) {
+        content.innerHTML = `<p style="color:red;">Error loading file: ${err.message}</p>`;
+        console.error(err);
+      }
+    }
+
+    // load default
+    loadMarkdown('notes/about.md');
+
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+
+        // remove 'active' from all links
+        links.forEach(l => l.classList.remove('active'));
+        // add 'active' to clicked link
+        link.classList.add('active');
+
+        // remove 'active' from all collapsibles
+        collapsibles.forEach(c => c.classList.remove('active'));
+        // add 'active' only to parent collapsible of the clicked link
+        const parentCollapsible = link.closest('.collapsible-container').querySelector('.collapsible');
+        if (parentCollapsible) parentCollapsible.classList.add('active');
+
+        const file = link.getAttribute('data-file');
+        loadMarkdown(file);
+      });
+    });
+
+  });
+  </script>
+
+</body>
+</html>
