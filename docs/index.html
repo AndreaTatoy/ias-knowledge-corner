@@ -39,6 +39,7 @@
       color: #fff;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       align-items: center;
       padding: 20px;
     }
@@ -94,11 +95,31 @@
       color: #3A6F43;
     }
 
+    #sidebar-footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .github-link {
+      color: #FFD5D5;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 5px 10px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .github-link:hover {
+      background: #FFD5D5;
+      color: #3A6F43;
+    }
+
     /* content area */
     #content {
       flex: 1;
       overflow-y: auto;
-      padding: 30px;
+      padding: 30px 40px;
       background: #FFD5D5;
       color: #333;
     }
@@ -145,6 +166,15 @@
     a {
       color: #FDAAAA;
       text-decoration: underline;
+    }
+
+    #description {
+      font-size: 14px;
+      text-align: center;
+      color: #ffffff;
+      height: 145px;
+      overflow: hidden;
+      white-space: pre-wrap; 
     }
 
     .collapsible {
@@ -214,6 +244,24 @@
       transform: rotate(180deg);
       vertical-align: 2px;
     }
+    
+    .profile-img {
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .profile-img:hover {
+        transform: scale(1.05) rotate(-2deg);
+        box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    .page-transition {
+        animation: slideUpSmooth 0.8s ease-out;
+    }
+
+    @keyframes slideUpSmooth {
+        0% { opacity: 0; transform: translateY(40px); }
+        100% { opacity: 1; transform: translateY(0); }
+    }
 
 </style>
 
@@ -221,17 +269,21 @@
 <body>
   <div id="container">
     <div id="sidebar">
-      <img src="me.jpg" alt="Louise Andrea R. Tatoy">
-      <h2>Louise Andrea R. Tatoy</h2>
-      <p>🌸 hey there! welcome to my little corner of knowledge 🌟<br><br>
-      grab a cup of coffee ☕, <br> explore the topics, and let's have some fun learning about information <br> security! 🚀💻</p>
+      <img src="me.jpg" alt="Louise Andrea Tatoy" class="profile-img">
+      <h2 style="margin-top: 14px;">Louise Andrea R. Tatoy</h2>
+      <p id="description"></p>
 
       <nav>
+        <ul style="list-style:none; padding:0; width:100%; margin-bottom:14px;">
+          <li>
+            <a href="#" data-file="notes/about.md">About Me</a>
+          </li>
+        </ul>
+
         <!-- Midterm Topics -->
         <div class="collapsible-container">
           <button class="collapsible">Midterm Topics</button>
           <ul class="collapsible-content">
-            <li><a href="#" class="active" data-file="notes/about.md">About Me</a></li>
             <li><a href="#" data-file="notes/1.md">Importance of Security</a></li>
             <li><a href="#" data-file="notes/2.md">Career Opportunities</a></li>
             <li><a href="#" data-file="notes/3.md">Encryption Fundamentals</a></li>
@@ -246,79 +298,120 @@
         <div class="collapsible-container">
           <button class="collapsible">Final Term Topics</button>
           <ul class="collapsible-content">
-            
+            <li><a href="#" data-file="notes/8.md">Network Traffic Analysis</a></li>
+            <li><a href="#" data-file="notes/9.md">Event Logs</a></li>
+            <li><a href="#" data-file="notes/10.md">Email Security Fundamental</a></li>
           </ul>
         </div>
       </nav>
+      
+    <div id="sidebar-footer">
+      <a href="https://github.com/AndreaTatoy" target="_blank" class="github-link">
+        🐱 GitHub
+      </a>
     </div>
 
-    <div id="content">
+    </div>
+
+    <div id="content" class="page-transition">
       <p>Loading...</p>
     </div>
   </div>
 
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
+<script>
+document.addEventListener('DOMContentLoaded', () => {
 
-    const collapsibles = document.querySelectorAll('.collapsible');
-    collapsibles.forEach(button => {
-      button.addEventListener('click', () => {
-        const content = button.nextElementSibling;
+  const collapsibles = document.querySelectorAll('.collapsible');
+  const links = document.querySelectorAll('nav a');
+  const content = document.getElementById('content');
 
-        collapsibles.forEach(other => {
-          if (other !== button) {
-            other.classList.remove('active');
-            other.nextElementSibling.style.display = 'none';
-          }
-        });
+  // ---- Typing Animation ----
+  const description = document.getElementById('description');
+  const text = "🌸 hey there! welcome to my little corner of knowledge! 🌟\n\ngrab a cup of coffee ☕, \nexplore the topics, and let's have some fun learning about information \nsecurity! 🚀💻";
+  let i = 0;
 
-        const isOpen = content.style.display === "block";
-        content.style.display = isOpen ? "none" : "block";
-
-        button.classList.toggle('active', !isOpen);
-      });
-    });
-
-    const links = document.querySelectorAll('.collapsible-content li a');
-    const content = document.getElementById('content');
-
-    async function loadMarkdown(file) {
-      try {
-        const res = await fetch(file);
-        if (!res.ok) throw new Error('File not found: ' + file + ' (status: ' + res.status + ')');
-        const mdText = await res.text();
-        content.innerHTML = marked.parse(mdText);
-      } catch (err) {
-        content.innerHTML = `<p style="color:red;">Error loading file: ${err.message}</p>`;
-        console.error(err);
-      }
+  function typeWriter() {
+    if (i < text.length) {
+      description.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
+      i++;
+      setTimeout(typeWriter,30); // typing speed in ms
     }
+  }
 
-    // load default
-    loadMarkdown('notes/about.md');
+  typeWriter();
 
-    links.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
+  // ---- Collapsible toggle ----
+  collapsibles.forEach(button => {
+    button.addEventListener('click', () => {
+      const panel = button.nextElementSibling;
 
-        // remove 'active' from all links
-        links.forEach(l => l.classList.remove('active'));
-        // add 'active' to clicked link
-        link.classList.add('active');
-
-        // remove 'active' from all collapsibles
-        collapsibles.forEach(c => c.classList.remove('active'));
-        // add 'active' only to parent collapsible of the clicked link
-        const parentCollapsible = link.closest('.collapsible-container').querySelector('.collapsible');
-        if (parentCollapsible) parentCollapsible.classList.add('active');
-
-        const file = link.getAttribute('data-file');
-        loadMarkdown(file);
+      collapsibles.forEach(other => {
+        if (other !== button) {
+          other.classList.remove('active');
+          other.nextElementSibling.style.display = 'none';
+        }
       });
-    });
 
+      const isOpen = panel.style.display === "block";
+      panel.style.display = isOpen ? "none" : "block";
+      button.classList.toggle('active', !isOpen);
+    });
   });
-  </script>
+
+  // ---- Load markdown ----
+  async function loadMarkdown(file) {
+    try {
+      const res = await fetch(file);
+      if (!res.ok) throw new Error('File not found: ' + file + ' (status: ' + res.status + ')');
+      const mdText = await res.text();
+      
+      content.classList.remove('page-transition');
+      void content.offsetWidth; // force reflow
+      content.classList.add('page-transition');
+
+      content.innerHTML = marked.parse(mdText);
+    } catch (err) {
+      content.innerHTML = `<p style="color:red;">Error loading file: ${err.message}</p>`;
+      console.error(err);
+    }
+  }
+
+  // ---- Default page to About Me ----
+  const aboutLink = document.querySelector('a[data-file="notes/about.md"]');
+
+  if (aboutLink) {
+    aboutLink.classList.add('active'); 
+    loadMarkdown('notes/about.md');    
+  }
+
+  // ---- Link click behavior ----
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+
+      links.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+
+      const isAbout = !link.closest('.collapsible-container');
+      if (isAbout) {
+        collapsibles.forEach(c => {
+          c.classList.remove('active');
+          c.nextElementSibling.style.display = 'none';
+        });
+      } else {
+        collapsibles.forEach(c => c.classList.remove('active'));
+        const parentCollapsible = link.closest('.collapsible-container').querySelector('.collapsible');
+        parentCollapsible.classList.add('active');
+        parentCollapsible.nextElementSibling.style.display = 'block';
+      }
+
+      const file = link.getAttribute('data-file');
+      loadMarkdown(file);
+    });
+  });
+
+});
+</script>
 
 </body>
 </html>
